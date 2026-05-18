@@ -1,0 +1,298 @@
+@import "tailwindcss";
+
+/* ---------- Brand tokens ---------- */
+@theme {
+  --color-ink: #0a0a0a;
+  --color-charcoal: #111113;
+  --color-graphite: #18181b;
+  --color-steel: #232327;
+  --color-iron: #3a3a40;
+  --color-silver: #b8b8be;
+  --color-bone: #f5f2ec;
+  --color-snow: #ffffff;
+  --color-accent: #c7ff3e;
+  --color-accent-dim: #8aac2a;
+  --color-danger: #ff4d4d;
+
+  /* Semantic */
+  --color-bg: var(--color-ink);
+  --color-surface: var(--color-charcoal);
+  --color-surface-elevated: var(--color-graphite);
+  --color-fg: var(--color-snow);
+  --color-fg-muted: var(--color-silver);
+  --color-border: #232327;
+  --color-border-strong: #3a3a40;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Radius — tight, athletic */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows — luxury, low opacity */
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 12px rgb(0 0 0 / 0.18);
+  --shadow-card: 0 8px 28px rgb(0 0 0 / 0.32), 0 1px 0 rgb(255 255 255 / 0.04) inset;
+  --shadow-glow: 0 0 0 1px rgb(199 255 62 / 0.25), 0 8px 32px rgb(199 255 62 / 0.18);
+
+  /* Easings */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Reset extensions ---------- */
+*,
+*::before,
+*::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* ---------- Custom scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-steel);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-iron);
+}
+
+/* ---------- Display utilities (composed via @utility for Tailwind v4) ---------- */
+@utility container-px {
+  padding-inline: 1rem;
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    padding-inline: 2.5rem;
+  }
+  @media (min-width: 1536px) {
+    padding-inline: 4rem;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+@utility glass {
+  background: rgb(24 24 27 / 0.55);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgb(255 255 255 / 0.06);
+}
+
+@utility glass-strong {
+  background: rgb(10 10 10 / 0.7);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+
+@utility hairline {
+  border: 1px solid rgb(255 255 255 / 0.06);
+}
+
+/* ---------- Component-level keyframes ---------- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Radix data-state animations ---------- */
+@keyframes vresta-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes vresta-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes vresta-slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes vresta-slide-out-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+@keyframes vresta-slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+@keyframes vresta-slide-out-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@keyframes vresta-slide-in-top {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+@keyframes vresta-slide-out-top {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+@keyframes vresta-slide-in-bottom {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes vresta-slide-out-bottom {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+@keyframes vresta-zoom-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes vresta-zoom-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+/* Overlay (always fade) */
+[data-radix-popper-content-wrapper] [data-state="open"],
+[role="dialog"][data-state="open"] + [data-radix-portal] {
+  /* placeholder, real selectors live on the primitives */
+}
+
+[data-radix-dialog-overlay][data-state="open"],
+[data-vresta-overlay][data-state="open"] {
+  animation: vresta-fade-in 200ms var(--ease-out-quart);
+}
+[data-radix-dialog-overlay][data-state="closed"],
+[data-vresta-overlay][data-state="closed"] {
+  animation: vresta-fade-out 200ms var(--ease-out-quart);
+}
+
+[data-vresta-sheet="right"][data-state="open"] {
+  animation: vresta-slide-in-right 420ms var(--ease-out-expo);
+}
+[data-vresta-sheet="right"][data-state="closed"] {
+  animation: vresta-slide-out-right 320ms var(--ease-out-expo);
+}
+[data-vresta-sheet="left"][data-state="open"] {
+  animation: vresta-slide-in-left 420ms var(--ease-out-expo);
+}
+[data-vresta-sheet="left"][data-state="closed"] {
+  animation: vresta-slide-out-left 320ms var(--ease-out-expo);
+}
+[data-vresta-sheet="top"][data-state="open"] {
+  animation: vresta-slide-in-top 420ms var(--ease-out-expo);
+}
+[data-vresta-sheet="top"][data-state="closed"] {
+  animation: vresta-slide-out-top 320ms var(--ease-out-expo);
+}
+[data-vresta-sheet="bottom"][data-state="open"] {
+  animation: vresta-slide-in-bottom 420ms var(--ease-out-expo);
+}
+[data-vresta-sheet="bottom"][data-state="closed"] {
+  animation: vresta-slide-out-bottom 320ms var(--ease-out-expo);
+}
+
+[data-vresta-dialog][data-state="open"] {
+  animation: vresta-zoom-in 220ms var(--ease-out-expo);
+}
+[data-vresta-dialog][data-state="closed"] {
+  animation: vresta-zoom-out 180ms var(--ease-out-expo);
+}
+
+/* ---------- Accordion ---------- */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+.data-\[state\=open\]\:animate-accordion-down[data-state="open"] {
+  animation: accordion-down 300ms var(--ease-out-quart);
+}
+.data-\[state\=closed\]\:animate-accordion-up[data-state="closed"] {
+  animation: accordion-up 250ms var(--ease-out-quart);
+}
+
+@utility animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(255 255 255 / 0.06) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+@utility animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ---------- Focus ring ---------- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
